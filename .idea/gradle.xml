@@ -9,6 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/easy-annotation" />
+            <option value="$PROJECT_DIR$/easy-compiler" />
+            <option value="$PROJECT_DIR$/easy-core" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

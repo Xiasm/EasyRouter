@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyRouter.iml" filepath="$PROJECT_DIR$/EasyRouter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy-annotation/easy-annotation.iml" filepath="$PROJECT_DIR$/easy-annotation/easy-annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy-compiler/easy-compiler.iml" filepath="$PROJECT_DIR$/easy-compiler/easy-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easy-core/easy-core.iml" filepath="$PROJECT_DIR$/easy-core/easy-core.iml" />
     </modules>
   </component>
 </project>
