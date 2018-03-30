@@ -2,14 +2,18 @@ package com.xsm.easy.compiler.processor;
 
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
+import com.squareup.javapoet.TypeSpec;
 import com.xsm.easy.annotation.Route;
 import com.xsm.easy.annotation.modle.RouteMeta;
 import com.xsm.easy.compiler.utils.Constant;
 import com.xsm.easy.compiler.utils.Log;
 import com.xsm.easy.compiler.utils.Utils;
 
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +32,7 @@ import javax.annotation.processing.SupportedOptions;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
@@ -150,9 +155,44 @@ public class RouterProcessor extends AbstractProcessor {
 
     private void generatedGroup(TypeElement iRouteGroup) {
         //创建参数类型 Map<String, RouteMeta>
-        ParameterizedTypeName parameterizedTypeName = ParameterizedTypeName.get(ClassName.get(Map.class), ClassName.get(String.class), ClassName.get(RouteMeta.class));
-        ParameterSpec altas = ParameterSpec.builder(parameterizedTypeName, "altas").build();
+        ParameterizedTypeName parameterizedTypeName = ParameterizedTypeName
+                .get(ClassName.get(Map.class), ClassName.get(String.class), ClassName.get(RouteMeta.class));
+        ParameterSpec altas = ParameterSpec.builder(parameterizedTypeName, "atlas").build();
 
+        for (Map.Entry<String, List<RouteMeta>> entry : groupMap.entrySet()) {
+            MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("loadInto")
+                    .addModifiers(Modifier.PUBLIC)
+                    .addAnnotation(Override.class)
+                    .addParameter(altas);
+
+            String groupName = entry.getKey();
+            List<RouteMeta> groupData = entry.getValue();
+            for (RouteMeta routeMeta : groupData) {
+                //函数体的添加
+                methodBuilder.addStatement("atlas.put($S,$T.build($T.$L,$T.class,$S,$S))",
+                        routeMeta.getPath(),
+                        ClassName.get(RouteMeta.class),
+                        ClassName.get(RouteMeta.Type.class),
+                        routeMeta.getType(),
+                        ClassName.get(((TypeElement) routeMeta.getElement())),
+                        routeMeta.getPath(),
+                        routeMeta.getGroup());
+            }
+            String groupClassName = Constant.NAME_OF_GROUP + groupName;
+            TypeSpec typeSpec = TypeSpec.classBuilder(groupClassName)
+                    .addSuperinterface(ClassName.get(iRouteGroup))
+                    .addModifiers(Modifier.PUBLIC)
+                    .addMethod(methodBuilder.build())
+                    .build();
+            JavaFile javaFile = JavaFile.builder(Constant.PACKAGE_OF_GENERATE_FILE, typeSpec).build();
+            try {
+                javaFile.writeTo(filerUtils);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            rootMap.put(groupName, groupClassName);
+
+        }
     }
 
     /**
