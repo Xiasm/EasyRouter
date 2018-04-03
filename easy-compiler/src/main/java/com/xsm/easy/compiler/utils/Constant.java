@@ -23,5 +23,6 @@ public class Constant {
     public static final String NAME_OF_ROOT = PROJECT + SEPARATOR + "Root" + SEPARATOR;
     public static final String PACKAGE_OF_GENERATE_FILE = "com.xsm.easyrouter.routes";
 
+    public static final String METHOD_LOAD_INTO = "loadInto";
 
 }

@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.xsm.module2">
+
+    <application>
+        <activity android:name=".Module2MainActivity"/>
+    </application>
+
+</manifest>

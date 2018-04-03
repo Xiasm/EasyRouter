@@ -1,0 +1,61 @@
+if (isModule) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+def cfg = rootProject.ext.android
+def appId = rootProject.ext.appId
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+
+    defaultConfig {
+        if (!isModule) {
+            applicationId appId.module1
+        }
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+
+        //添加一条 boolean类型的变量
+        buildConfigField("boolean", "isModule", String.valueOf(isModule))
+
+        sourceSets {
+            main {
+                if (isModule) {
+                    manifest.srcFile 'src/main/AndroidManifest.xml'
+                } else {
+                    manifest.srcFile 'src/main/module/AndroidManifest.xml'
+                    java.srcDirs 'src/main/module/java', 'src/main/java'
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    annotationProcessor project(':easy-compiler')
+    implementation project(':base')
+}

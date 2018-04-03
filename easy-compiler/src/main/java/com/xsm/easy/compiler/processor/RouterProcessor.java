@@ -7,6 +7,7 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
+import com.squareup.javapoet.WildcardTypeName;
 import com.xsm.easy.annotation.Route;
 import com.xsm.easy.annotation.modle.RouteMeta;
 import com.xsm.easy.compiler.utils.Constant;
@@ -14,7 +15,6 @@ import com.xsm.easy.compiler.utils.Log;
 import com.xsm.easy.compiler.utils.Utils;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -149,18 +149,64 @@ public class RouterProcessor extends AbstractProcessor {
         TypeElement iRouteGroup = elementUtils.getTypeElement(Constant.IROUTE_GROUP);
         TypeElement iRouteRoot = elementUtils.getTypeElement(Constant.IROUTE_ROOT);
 
-        //生成$$Group$$记录分组表
+        //生成Group记录分组表
         generatedGroup(iRouteGroup);
+
+        //生成Root类 作用：记录<分组，对应的Group类>
+        generatedRoot(iRouteRoot, iRouteGroup);
+    }
+
+    /**
+     * 生成Root类  作用：记录<分组，对应的Group类>
+     * @param iRouteRoot
+     * @param iRouteGroup
+     */
+    private void generatedRoot(TypeElement iRouteRoot, TypeElement iRouteGroup) {
+        //创建参数类型 Map<String,Class<? extends IRouteGroup>> routes>
+        //Wildcard 通配符
+        ParameterizedTypeName parameterizedTypeName = ParameterizedTypeName.get(
+                ClassName.get(Map.class),
+                ClassName.get(String.class),
+                ParameterizedTypeName.get(
+                        ClassName.get(Class.class),
+                        WildcardTypeName.subtypeOf(ClassName.get(iRouteGroup))
+                ));
+        //参数 Map<String,Class<? extends IRouteGroup>> routes> routes
+        ParameterSpec parameter = ParameterSpec.builder(parameterizedTypeName, "routes").build();
+        //函数 public void loadInfo(Map<String,Class<? extends IRouteGroup>> routes> routes)
+        MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder(Constant.METHOD_LOAD_INTO)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Override.class)
+                .addParameter(parameter);
+        //函数体
+        for (Map.Entry<String, String> entry : rootMap.entrySet()) {
+            methodBuilder.addStatement("routes.put($S, $T.class)", entry.getKey(), ClassName.get(Constant.PACKAGE_OF_GENERATE_FILE, entry.getValue()));
+        }
+        //生成$Root$类
+        String className = Constant.NAME_OF_ROOT + moduleName;
+        TypeSpec typeSpec = TypeSpec.classBuilder(className)
+                .addSuperinterface(ClassName.get(iRouteRoot))
+                .addModifiers(Modifier.PUBLIC)
+                .addMethod(methodBuilder.build())
+                .build();
+        try {
+            JavaFile.builder(Constant.PACKAGE_OF_GENERATE_FILE, typeSpec).build().writeTo(filerUtils);
+            log.i("Generated RouteRoot：" + Constant.PACKAGE_OF_GENERATE_FILE + "." + className);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void generatedGroup(TypeElement iRouteGroup) {
         //创建参数类型 Map<String, RouteMeta>
-        ParameterizedTypeName parameterizedTypeName = ParameterizedTypeName
-                .get(ClassName.get(Map.class), ClassName.get(String.class), ClassName.get(RouteMeta.class));
+        ParameterizedTypeName parameterizedTypeName = ParameterizedTypeName.get(
+                ClassName.get(Map.class),
+                ClassName.get(String.class),
+                ClassName.get(RouteMeta.class));
         ParameterSpec altas = ParameterSpec.builder(parameterizedTypeName, "atlas").build();
 
         for (Map.Entry<String, List<RouteMeta>> entry : groupMap.entrySet()) {
-            MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("loadInto")
+            MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder(Constant.METHOD_LOAD_INTO)
                     .addModifiers(Modifier.PUBLIC)
                     .addAnnotation(Override.class)
                     .addParameter(altas);
@@ -217,7 +263,7 @@ public class RouterProcessor extends AbstractProcessor {
     }
 
     /**
-     * 验证地址合法性
+     * 验证path路由地址的合法性
      * @param routeMeta
      * @return
      */

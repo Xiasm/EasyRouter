@@ -1,1 +1,1 @@
-include ':app', ':easy-compiler', ':easy-annotation', ':easy-core'
+include ':app', ':easy-compiler', ':easy-annotation', ':easy-core', ':module1', ':module2', ':base'
