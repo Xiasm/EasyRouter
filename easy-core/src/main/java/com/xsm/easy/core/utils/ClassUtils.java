@@ -29,6 +29,34 @@ import dalvik.system.DexFile;
  */
 
 public class ClassUtils {
+
+    /**
+     * 获得程序所有的apk(instant run会产生很多split apk)
+     * @param context
+     * @return
+     * @throws PackageManager.NameNotFoundException
+     */
+    private static List<String> getSourcePaths(Context context) throws PackageManager.NameNotFoundException {
+        ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0);
+        List<String> sourcePaths = new ArrayList<>();
+        sourcePaths.add(applicationInfo.sourceDir);
+        //instant run
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (null != applicationInfo.splitSourceDirs) {
+                sourcePaths.addAll(Arrays.asList(applicationInfo.splitSourceDirs));
+            }
+        }
+        return sourcePaths;
+    }
+
+    /**
+     * 得到路由表的类名
+     * @param context
+     * @param packageName
+     * @return
+     * @throws PackageManager.NameNotFoundException
+     * @throws InterruptedException
+     */
     public static Set<String> getFileNameByPackageName(Application context, final String packageName) throws PackageManager.NameNotFoundException, InterruptedException {
         final Set<String> classNames = new HashSet<>();
         List<String> paths = getSourcePaths(context);
@@ -66,20 +94,10 @@ public class ClassUtils {
                 }
             });
         }
-        countDownLatch.wait();
+        //等待执行完成
+        countDownLatch.await();
         return classNames;
     }
 
-    private static List<String> getSourcePaths(Application context) throws PackageManager.NameNotFoundException {
-        ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0);
-        List<String> sourcePaths = new ArrayList<>();
-        sourcePaths.add(applicationInfo.sourceDir);
-        //instant run
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (null != applicationInfo.splitSourceDirs) {
-                sourcePaths.addAll(Arrays.asList(applicationInfo.splitSourceDirs));
-            }
-        }
-        return sourcePaths;
-    }
+
 }
