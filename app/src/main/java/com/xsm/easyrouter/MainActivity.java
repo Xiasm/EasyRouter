@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.xsm.easy.annotation.Route;
+import com.xsm.easy.core.EasyRouter;
 
 @Route(path = "/main/main")
 public class MainActivity extends AppCompatActivity {

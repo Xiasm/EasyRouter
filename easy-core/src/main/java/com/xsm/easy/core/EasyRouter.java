@@ -104,9 +104,7 @@ public class EasyRouter {
     }
 
     protected Object navigation(Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
-        try {
-            prepareCard(postcard);
-        } catch ()
+        return null;
     }
 
     /**
@@ -161,6 +159,6 @@ public class EasyRouter {
      * @param instance
      */
     public void inject(Activity instance) {
-        ExtraManager.getInstance().loadExtras(instance);
+
     }
 }

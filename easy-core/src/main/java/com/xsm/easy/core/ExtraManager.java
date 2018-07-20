@@ -1,7 +1,5 @@
 package com.xsm.easy.core;
 
-import android.util.LruCache;
-
 /**
  * Author: 夏胜明
  * Date: 2018/4/25 0025

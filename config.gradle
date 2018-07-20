@@ -1,6 +1,6 @@
 ext {
     //true 集成模式 false 组件模式
-    isModule = true
+    isModule = false
 
     android = [
             compileSdkVersion:26,
