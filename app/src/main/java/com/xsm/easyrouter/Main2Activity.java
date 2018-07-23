@@ -1,16 +1,16 @@
-package com.xsm.module2;
+package com.xsm.easyrouter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.xsm.easy.annotation.Route;
 
-@Route(path = "/module2/module2main")
-public class Module2MainActivity extends AppCompatActivity {
+@Route(path = "/show/main2")
+public class Main2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_module2_main);
+        setContentView(R.layout.activity_main2);
     }
 }

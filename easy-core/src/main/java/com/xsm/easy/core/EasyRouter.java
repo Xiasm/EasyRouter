@@ -3,9 +3,11 @@ package com.xsm.easy.core;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -80,6 +82,21 @@ public class EasyRouter {
 
     }
 
+    public Postcard build(String path) {
+        if (TextUtils.isEmpty(path)) {
+            throw new RuntimeException("路由地址无效!");
+        } else {
+            return build(path, extractGroup(path));
+        }
+    }
+
+    public Postcard build(String path, String group) {
+        if (TextUtils.isEmpty(path) || TextUtils.isEmpty(group)) {
+            throw new RuntimeException("路由地址无效!");
+        } else {
+            return new Postcard(path, group);
+        }
+    }
     /**
      * 获得组别
      *
@@ -104,6 +121,62 @@ public class EasyRouter {
     }
 
     protected Object navigation(Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
+        try {
+            prepareCard(postcard);
+
+        }catch (NoRouteFoundException e) {
+            e.printStackTrace();
+            //没找到
+            if (null != callback) {
+                callback.onLost(postcard);
+            }
+            return null;
+        }
+        if (null != callback) {
+            callback.onFound(postcard);
+        }
+
+        switch (postcard.getType()) {
+            case ACTIVITY:
+                final Context currentContext = null == context ? mContext : context;
+                final Intent intent = new Intent(currentContext, postcard.getDestination());
+                intent.putExtras(postcard.getExtras());
+                int flags = postcard.getFlags();
+                if (-1 != flags) {
+                    intent.setFlags(flags);
+                } else if (!(currentContext instanceof Activity)) {
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+//可能需要返回码
+                        if (requestCode > 0) {
+                            ActivityCompat.startActivityForResult((Activity) currentContext, intent,
+                                    requestCode, postcard.getOptionsBundle());
+                        } else {
+                            ActivityCompat.startActivity(currentContext, intent, postcard
+                                    .getOptionsBundle());
+                        }
+
+                        if ((0 != postcard.getEnterAnim() || 0 != postcard.getExitAnim()) &&
+                                currentContext instanceof Activity) {
+                            //老版本
+                            ((Activity) currentContext).overridePendingTransition(postcard
+                                            .getEnterAnim()
+                                    , postcard.getExitAnim());
+                        }
+                        //跳转完成
+                        if (null != callback) {
+                            callback.onArrival(postcard);
+                        }
+                    }
+                });
+                break;
+            case ISERVICE:
+
+                break;
+        }
         return null;
     }
 
@@ -159,6 +232,6 @@ public class EasyRouter {
      * @param instance
      */
     public void inject(Activity instance) {
-
+        ExtraManager.getInstance().loadExtras(instance);
     }
 }
