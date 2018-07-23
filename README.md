@@ -14,10 +14,10 @@
 ##### 第一节：组件化原理
 
 &nbsp;&nbsp;&nbsp;&nbsp;本文的重点是对通过APT实现组件路由进行介绍，所以对于组件化的基本知识在文中不会过多阐述，如有同学对组件化有不理解，可以参考网上众多的博客等介绍，然后再阅读demo中的组件化配置进行熟悉。</br>
-![avatar](D:\AtomWorkSpace\image\module_1.png) </br>
+<img src="http://pcayc3ynm.bkt.clouddn.com/module_1.png" /> </br>
 &nbsp;&nbsp;&nbsp;&nbsp;如图，在组件化中，为了业务逻辑的彻底解耦，同时也为了每个module都可以方便的单独运行和调试，上层的各个module不会进行相互依赖(只有在打正式包的时候才会让app壳module去依赖上层的其他module)，而是共同依赖于base module，base module中会依赖一些公共的第三方库和其他配置。那么在上层的各个module中，如何进行通信呢？</br>
 &nbsp;&nbsp;&nbsp;&nbsp;我们知道，传统的Activity之间通信，通过startActivity(intent)，而在组件化的项目中，上层的module没有依赖关系(即便两个module有依赖关系，也只能是单向的依赖)，那么假如login module中的一个Activity需要启动pay_module中的一个Activity便不能通过startActivity来进行跳转。那么大家想一下还有什么其他办法呢？ 可能有同学会想到隐式跳转，这当然也是一种解决方法，但是一个项目中不可能所有的跳转都是隐式的，这样会多很多过滤配置，而且非常不利于后期维护。如果你非要使用隐式跳转，那么我再提个需求，假如pay_module需要使用login_module中的用户信息，你总不能再启动一次LoginActivity去拿用户信息吧，显然这种方法是不太现实的。那么有没有一种更好的解决办法呢？办法当然是有的。下面看图：</br>
-![avatar](D:\AtomWorkSpace\image\module_2.png) </br>
+<img src="http://pcayc3ynm.bkt.clouddn.com/module_2.png" /> </br>
 &nbsp;&nbsp;&nbsp;&nbsp;在组件化中，我们通常都会在base_module上层再依赖一个router_module,而这个router_module就是负责各个模块之间页面跳转的。</br>
 &nbsp;&nbsp;&nbsp;&nbsp;在类似ARouter的路由框架中，在每个需要对其他module提供调用的Activity中，都会声明类似下面@Route注解，我们称之为路由地址
 ```
