@@ -926,10 +926,6 @@ private void prepareCard(Postcard card) {
 
 EaseRouter本身只是参照ARouter手动实现的路由框架，并且剔除掉了很多东西，如过滤器等，如果想要用在项目里，建议还是用ARouter更好(毕竟这只是个练手项目，功能也不够全面，当然有同学想对demo扩展后使用那当然更好，遇到什么问题及时联系我)。我的目的是通过自己手动实现来加深对知识的理解，这里面涉及到的知识点如apt、javapoet和组件化思路、编写框架的思路等。看到这里，如果感觉干货很多，欢迎点个star或分享给更多人。
 
-##### demo地址
-
-[仿ARouter一步步实现一个路由框架，点我访问源码，欢迎star](https://github.com/Xiasm/EasyRouter/blob/master/README2.md)
-
 ##### 联系方式
 
 email:xiasem@163.com
