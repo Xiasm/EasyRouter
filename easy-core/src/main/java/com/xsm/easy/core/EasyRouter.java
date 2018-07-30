@@ -123,7 +123,6 @@ public class EasyRouter {
     protected Object navigation(Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
         try {
             prepareCard(postcard);
-
         }catch (NoRouteFoundException e) {
             e.printStackTrace();
             //没找到
@@ -174,7 +173,8 @@ public class EasyRouter {
                 });
                 break;
             case ISERVICE:
-
+                return postcard.getService();
+            default:
                 break;
         }
         return null;

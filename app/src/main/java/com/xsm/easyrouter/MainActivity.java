@@ -14,13 +14,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     public void startModule1MainActivity(View view) {
-
+        EasyRouter.getsInstance().build("/module1/module1main").navigation();
     }
 
     public void startModule2MainActivity(View view) {
-
+        EasyRouter.getsInstance().build("/module2/module2main").navigation();
     }
 }

@@ -1,11 +1,13 @@
 package com.xsm.easy.core;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 
 import com.xsm.easy.annotation.modle.RouteMeta;
+import com.xsm.easy.core.callback.NavigationCallback;
 import com.xsm.easy.core.template.IService;
 
 import java.util.ArrayList;
@@ -234,6 +236,23 @@ public class Postcard extends RouteMeta {
 
     public Object navigation() {
         return EasyRouter.getsInstance().navigation(null, this, -1, null);
+    }
+
+    public Object navigation(Context context) {
+        return EasyRouter.getsInstance().navigation(context, this, -1, null);
+    }
+
+
+    public Object navigation(Context context, NavigationCallback callback) {
+        return EasyRouter.getsInstance().navigation(context, this, -1, callback);
+    }
+
+    public Object navigation(Context context, int requestCode) {
+        return EasyRouter.getsInstance().navigation(context, this, requestCode, null);
+    }
+
+    public Object navigation(Context context, int requestCode, NavigationCallback callback) {
+        return EasyRouter.getsInstance().navigation(context, this, requestCode, callback);
     }
 
 
