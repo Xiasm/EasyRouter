@@ -57,7 +57,8 @@ public class ClassUtils {
      * @throws PackageManager.NameNotFoundException
      * @throws InterruptedException
      */
-    public static Set<String> getFileNameByPackageName(Application context, final String packageName) throws PackageManager.NameNotFoundException, InterruptedException {
+    public static Set<String> getFileNameByPackageName(Application context, final String packageName)
+            throws PackageManager.NameNotFoundException, InterruptedException {
         final Set<String> classNames = new HashSet<>();
         List<String> paths = getSourcePaths(context);
         //使用同步计数器判断均处理完成

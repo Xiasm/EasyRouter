@@ -77,7 +77,7 @@ public class EasyRouter {
             }
         }
         for (Map.Entry<String, Class<? extends IRouteGroup>> stringClassEntry : Warehouse.groupsIndex.entrySet()) {
-            Log.e(TAG, "Root映射表[ " + stringClassEntry.getKey() + " : " + stringClassEntry.getValue() + "]");
+            Log.d(TAG, "Root映射表[ " + stringClassEntry.getKey() + " : " + stringClassEntry.getValue() + "]");
         }
 
     }
@@ -149,7 +149,7 @@ public class EasyRouter {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-//可能需要返回码
+                        //可能需要返回码
                         if (requestCode > 0) {
                             ActivityCompat.startActivityForResult((Activity) currentContext, intent,
                                     requestCode, postcard.getOptionsBundle());

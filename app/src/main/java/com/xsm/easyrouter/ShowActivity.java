@@ -5,12 +5,12 @@ import android.os.Bundle;
 
 import com.xsm.easy.annotation.Route;
 
-@Route(path = "/main/main2")
-public class Main2Activity extends AppCompatActivity {
+@Route(path = "/show/info")
+public class ShowActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_show);
     }
 }
