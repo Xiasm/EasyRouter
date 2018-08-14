@@ -15,7 +15,7 @@
 ##### 第一节：组件化原理
 
 &nbsp;&nbsp;&nbsp;&nbsp;本文的重点是对路由框架的实现进行介绍，所以对于组件化的基本知识在文中不会过多阐述，如有同学对组件化有不理解，可以参考网上众多的博客等介绍，然后再阅读demo中的组件化配置进行熟悉。</br>
-<img src="http://pcayc3ynm.bkt.clouddn.com/module_1.png" /> <br/>
+<img src="http://pcayc3ynm.bkt.clouddn.com/com_module_1.png" /> <br/>
 
 &nbsp;&nbsp;&nbsp;&nbsp;如上图，在组件化中，为了业务逻辑的彻底解耦，同时也为了每个module都可以方便的单独运行和调试，上层的各个module不会进行相互依赖(只有在正式联调的时候才会让app壳module去依赖上层的其他组件module)，而是共同依赖于base module，base module中会依赖一些公共的第三方库和其他配置。那么在上层的各个module中，如何进行通信呢？<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;我们知道，传统的Activity之间通信，通过startActivity(intent)，而在组件化的项目中，上层的module没有依赖关系(即便两个module有依赖关系，也只能是单向的依赖)，那么假如login module中的一个Activity需要启动pay_module中的一个Activity便不能通过startActivity来进行跳转。那么大家想一下还有什么其他办法呢？ 可能有同学会想到隐式跳转，这当然也是一种解决方法，但是一个项目中不可能所有的跳转都是隐式的，这样Manifest文件会有很多过滤配置，而且非常不利于后期维护。当然你用反射也可以实现跳转，但是第一：大量的使用反射跳转对性能会有影响，第二：你需要拿到Activity的类文件，在组件开发的时候，想拿到其他module的类文件是很麻烦的（因为组件开发的时候组件module之间是没有相互引用的，你只能通过找到类的路径去拿到这个class，显然非常麻烦），那么有没有一种更好的解决办法呢？办法当然是有的。下面看图：<br>
