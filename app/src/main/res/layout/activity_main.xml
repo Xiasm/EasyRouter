@@ -20,4 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:text="加法"
+        android:onClick="add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
