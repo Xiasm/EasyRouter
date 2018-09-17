@@ -26,6 +26,8 @@
 [三、利用apt和javapoet生成路由映射文件](https://github.com/Xiasm/EasyRouter/wiki/%E5%88%A9%E7%94%A8apt%E5%92%8Cjavapoet%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6)
 <br/>
 
+[四、框架的设计](https://github.com/Xiasm/EasyRouter/wiki/%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1)
+
 <br/>
 #### 联系我
 
