@@ -32,6 +32,9 @@
 [五、框架的初始化](https://github.com/Xiasm/EasyRouter/wiki/%E6%A1%86%E6%9E%B6%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96)
 <br/>
 
+[六、实现路由跳转](https://github.com/Xiasm/EasyRouter/wiki/%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
+<br/>
+
 <br/>
 #### 联系我
 
