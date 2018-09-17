@@ -35,6 +35,8 @@
 [六、实现路由跳转](https://github.com/Xiasm/EasyRouter/wiki/%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
 <br/>
 
+[七、为什么需要依赖注入](https://github.com/Xiasm/EasyRouter/wiki/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
+
 <br/>
 #### 联系我
 
