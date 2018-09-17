@@ -23,7 +23,7 @@
 [二、通过Route注解去探究如何实现路由跳转](https://github.com/Xiasm/EasyRouter/wiki/%E9%80%9A%E8%BF%87Route%E6%B3%A8%E8%A7%A3%E5%8E%BB%E6%8E%A2%E7%A9%B6%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
 <br/>
 
-[利用apt和javapoet生成路由映射文件](https://github.com/Xiasm/EasyRouter/wiki/%E5%88%A9%E7%94%A8apt%E5%92%8Cjavapoet%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6)
+[三、利用apt和javapoet生成路由映射文件](https://github.com/Xiasm/EasyRouter/wiki/%E5%88%A9%E7%94%A8apt%E5%92%8Cjavapoet%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6)
 <br/>
 
 <br/>
