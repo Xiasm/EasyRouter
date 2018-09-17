@@ -20,9 +20,11 @@
 
 [一、从组件化引入路由设计需要满足的条件](https://github.com/Xiasm/EasyRouter/wiki/%E4%BB%8E%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1%E8%AE%BE%E8%AE%A1%E9%9C%80%E8%A6%81%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6)
 
-
+[二、通过Route注解去探究如何实现路由跳转](https://github.com/Xiasm/EasyRouter/wiki/%E9%80%9A%E8%BF%87Route%E6%B3%A8%E8%A7%A3%E5%8E%BB%E6%8E%A2%E7%A9%B6%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC)
 <br/>
 
+
+<br/>
 #### 联系我
 
 email:xiasem@163.com & devxiasm@gmail.com<br/>
