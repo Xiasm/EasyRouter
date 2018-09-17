@@ -13,10 +13,13 @@
 
 * 最后，像instantrun处理、框架设计等等
 
-#### 推荐的阅读方法
+#### 项目理解推荐
 既然你来了，我想我们的目的很明确，就是要从根本上理解路由。所以我推荐大家把demo clone下来在电脑上跑一遍，然后边浏览WIKI的文档边读代码，这样才能快速的理解设计的思想。<br/>
 
-[文档指导，点击跳转wiki](https://github.com/Xiasm/EasyRouter/wiki)
+[文档指导，点击跳转wiki](https://github.com/Xiasm/EasyRouter/wiki)<br/>
+
+###### 目录：<br/>
+
 
 [一、从组件化引入路由设计需要满足的条件](https://github.com/Xiasm/EasyRouter/wiki/%E4%BB%8E%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1%E8%AE%BE%E8%AE%A1%E9%9C%80%E8%A6%81%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6)
 
