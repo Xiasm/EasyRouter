@@ -37,7 +37,9 @@
 
 [七、为什么需要依赖注入](https://github.com/Xiasm/EasyRouter/wiki/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
 
+[八、Activity的属性注入](https://github.com/Xiasm/EasyRouter/wiki/Activity%E7%9A%84%E5%B1%9E%E6%80%A7%E6%B3%A8%E5%85%A5)
 <br/>
+
 #### 联系我
 
 email:xiasem@163.com & devxiasm@gmail.com<br/>
