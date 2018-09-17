@@ -1,4 +1,4 @@
-### 项目简介
+#### 简介
 路由在项目中用了很长一段时间了，一直用的ARouter，很早的时候，我就把ARouter里里外外研究了一番，可以说里面干货多多，但时间长了就有些记不住了，甚至一些技术点都记的混淆了。
 于是便萌生了写一篇技术博客的想法，后来又觉着干巴巴的写一篇文章不足以让我认识的更深刻，就想着可否按照ARouter的思想自己实现一个简单的路由框架呢？<br/>
 后来，在我不断地学习推动下，耗费了几个月的业余时间，终于完成了这个项目。
@@ -18,6 +18,10 @@
 
 [文档指导，点击跳转wiki](https://github.com/Xiasm/EasyRouter/wiki)
 
+[一、从组件化引入路由设计需要满足的条件](https://github.com/Xiasm/EasyRouter/wiki/%E4%BB%8E%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BC%95%E5%85%A5%E8%B7%AF%E7%94%B1%E8%AE%BE%E8%AE%A1%E9%9C%80%E8%A6%81%E6%BB%A1%E8%B6%B3%E7%9A%84%E6%9D%A1%E4%BB%B6)
+
+
+<br/>
 #### 联系我
 email:xiasem@163.com & devxiasm@gmail.com<br/>
 微信：xsm0824mn003
