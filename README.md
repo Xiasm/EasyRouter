@@ -27,6 +27,10 @@
 <br/>
 
 [四、框架的设计](https://github.com/Xiasm/EasyRouter/wiki/%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1)
+<br/>
+
+[五、框架的初始化](https://github.com/Xiasm/EasyRouter/wiki/%E6%A1%86%E6%9E%B6%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96)
+<br/>
 
 <br/>
 #### 联系我
