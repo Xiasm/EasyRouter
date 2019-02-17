@@ -46,9 +46,11 @@ public class EasyRouter {
     }
 
     public static EasyRouter getsInstance() {
-        synchronized (EasyRouter.class) {
-            if (sInstance == null) {
-                sInstance = new EasyRouter();
+        if (sInstance == null) {
+            synchronized (EasyRouter.class) {
+                if (sInstance == null) {
+                    sInstance = new EasyRouter();
+                }
             }
         }
         return sInstance;
