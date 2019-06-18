@@ -29,5 +29,10 @@ public interface NavigationCallback {
      */
     void onArrival(Postcard postcard);
 
-
+    /**
+     * 中断了路由跳转
+     * @author luoxiaohui
+     * @createTime 2019-06-18 17:00
+     */
+    void onInterrupt(Throwable throwable);
 }

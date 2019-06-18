@@ -12,8 +12,12 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.xsm.easy.annotation.modle.RouteMeta;
+import com.xsm.easy.core.callback.InterceptorCallback;
 import com.xsm.easy.core.callback.NavigationCallback;
 import com.xsm.easy.core.exception.NoRouteFoundException;
+import com.xsm.easy.core.implments.InterceptorImpl;
+import com.xsm.easy.core.template.IInterceptor;
+import com.xsm.easy.core.template.IInterceptorGroup;
 import com.xsm.easy.core.template.IRouteGroup;
 import com.xsm.easy.core.template.IRouteRoot;
 import com.xsm.easy.core.template.IService;
@@ -36,6 +40,7 @@ public class EasyRouter {
     private static final String SDK_NAME = "EaseRouter";
     private static final String SEPARATOR = "_";
     private static final String SUFFIX_ROOT = "Root";
+    private static final String SUFFIX_INTERCEPTOR = "Interceptor";
 
     private static EasyRouter sInstance;
     private static Application mContext;
@@ -60,11 +65,13 @@ public class EasyRouter {
         mContext = application;
         try {
             loadInfo();
+            InterceptorImpl.init(application.getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, "初始化失败!", e);
         }
     }
+
 
     /**
      * 分组表制作
@@ -76,6 +83,9 @@ public class EasyRouter {
             if (className.startsWith(ROUTE_ROOT_PAKCAGE + "." + SDK_NAME + SEPARATOR + SUFFIX_ROOT)) {
                 //root中注册的是分组信息 将分组信息加入仓库中
                 ((IRouteRoot) Class.forName(className).getConstructor().newInstance()).loadInto(Warehouse.groupsIndex);
+            } else if (className.startsWith(ROUTE_ROOT_PAKCAGE + "." + SDK_NAME + SEPARATOR + SUFFIX_INTERCEPTOR)) {
+
+                ((IInterceptorGroup) Class.forName(className).getConstructor().newInstance()).loadInto(Warehouse.interceptorsIndex);
             }
         }
         for (Map.Entry<String, Class<? extends IRouteGroup>> stringClassEntry : Warehouse.groupsIndex.entrySet()) {
@@ -99,6 +109,7 @@ public class EasyRouter {
             return new Postcard(path, group);
         }
     }
+
     /**
      * 获得组别
      *
@@ -123,9 +134,24 @@ public class EasyRouter {
     }
 
     protected Object navigation(Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
+
+        if (callback != null) {
+
+            InterceptorImpl.onInterceptions(postcard, new InterceptorCallback() {
+                @Override
+                public void onNext(Postcard postcard) {
+                }
+
+                @Override
+                public void onInterrupt(String interruptMsg) {
+
+                    callback.onInterrupt(new Throwable(interruptMsg));
+                }
+            });
+        }
         try {
             prepareCard(postcard);
-        }catch (NoRouteFoundException e) {
+        } catch (NoRouteFoundException e) {
             e.printStackTrace();
             //没找到
             if (null != callback) {
@@ -184,6 +210,7 @@ public class EasyRouter {
 
     /**
      * 准备卡片
+     *
      * @param card
      */
     private void prepareCard(Postcard card) {

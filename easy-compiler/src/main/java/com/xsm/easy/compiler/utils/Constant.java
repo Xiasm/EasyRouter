@@ -18,11 +18,13 @@ public class Constant {
     public static final String ARGUMENTS_NAME = "moduleName";
     public static final String ANNOTATION_TYPE_ROUTE = "com.xsm.easy.annotation.Route";
     public static final String ANN_TYPE_EXTRA = "com.xsm.easy.annotation.Extra";
+    public static final String ANNOTATION_TYPE_INTERCEPTOR = "com.xsm.easy.annotation.Interceptor";
 
     public static final String IROUTE_GROUP = "com.xsm.easy.core.template.IRouteGroup";
     public static final String IROUTE_ROOT = "com.xsm.easy.core.template.IRouteRoot";
     public static final String IEXTRA = "com.xsm.easy.core.template.IExtra";
-
+    public static final String IINTERCEPTOR = "com.xsm.easy.core.template.IInterceptor";
+    public static final String IINTERCEPTOR_GROUP = "com.xsm.easy.core.template.IInterceptorGroup";
 
     public static final String SEPARATOR = "_";
     public static final String PROJECT = "EaseRouter";
@@ -61,6 +63,7 @@ public class Constant {
 
 
     public static final String NAME_OF_EXTRA = SEPARATOR + "Extra";
+    public static final String NAME_OF_INTERCEPTOR = PROJECT + SEPARATOR + "Interceptor" + SEPARATOR;
 
 
 }
