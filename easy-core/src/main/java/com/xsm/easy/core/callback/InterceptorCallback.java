@@ -14,12 +14,12 @@ public interface InterceptorCallback {
      * @author luoxiaohui
      * @createTime 2019-05-23 20:50
      */
-    void next(Postcard postcard);
+    void onNext(Postcard postcard);
 
     /**
      * 拦截器拦截成功，中断流程
      * @author luoxiaohui
      * @createTime 2019-05-23 20:42
      */
-    void interrupt();
+    void onInterrupt(String interruptMsg);
 }

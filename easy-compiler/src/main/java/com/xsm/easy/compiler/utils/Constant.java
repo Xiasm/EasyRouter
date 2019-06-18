@@ -24,7 +24,7 @@ public class Constant {
     public static final String IROUTE_ROOT = "com.xsm.easy.core.template.IRouteRoot";
     public static final String IEXTRA = "com.xsm.easy.core.template.IExtra";
     public static final String IINTERCEPTOR = "com.xsm.easy.core.template.IInterceptor";
-    public static final String IINTERCEPTOR_GROUP = "com.xsm.easy.core.template.IInterceptor_GROUP";
+    public static final String IINTERCEPTOR_GROUP = "com.xsm.easy.core.template.IInterceptorGroup";
 
     public static final String SEPARATOR = "_";
     public static final String PROJECT = "EaseRouter";
@@ -63,6 +63,7 @@ public class Constant {
 
 
     public static final String NAME_OF_EXTRA = SEPARATOR + "Extra";
+    public static final String NAME_OF_INTERCEPTOR = PROJECT + SEPARATOR + "Interceptor" + SEPARATOR;
 
 
 }

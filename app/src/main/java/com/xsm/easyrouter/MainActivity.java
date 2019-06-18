@@ -2,16 +2,20 @@ package com.xsm.easyrouter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.xsm.base.providers.module1.Module1Providers;
 import com.xsm.easy.annotation.Route;
 import com.xsm.easy.core.EasyRouter;
+import com.xsm.easy.core.Postcard;
+import com.xsm.easy.core.callback.NavigationCallback;
 
 @Route(path = "/main/main")
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private Module1Providers module1Providers;
 
     @Override
@@ -32,7 +36,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startModule2MainActivity(View view) {
-        EasyRouter.getsInstance().build("/module2/module2main").navigation();
+        EasyRouter.getsInstance().build("/module2/module2main").navigation(this, new NavigationCallback() {
+            @Override
+            public void onFound(Postcard postcard) {
+
+            }
+
+            @Override
+            public void onLost(Postcard postcard) {
+
+            }
+
+            @Override
+            public void onArrival(Postcard postcard) {
+
+            }
+
+            @Override
+            public void onInterrupt(Throwable throwable) {
+
+                Log.e(TAG, throwable.getMessage());
+            }
+        });
     }
 
     public void add(View view) {

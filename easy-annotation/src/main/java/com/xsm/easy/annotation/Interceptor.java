@@ -15,6 +15,12 @@ import java.lang.annotation.Target;
 public @interface Interceptor {
 
     /**
+     * 拦截器优先级
+     * @author luoxiaohui
+     * @createTime 2019-06-04 20:51
+     */
+    int priority();
+    /**
      * 拦截器的名称
      * @author luoxiaohui
      * @createTime 2019-05-23 20:33

@@ -10,10 +10,10 @@ import java.util.Map;
 public interface IInterceptorGroup {
 
     /**
-     * key为拦截器的名称，value为拦截器
+     * key为拦截器的优先级，value为拦截器
      * @author luoxiaohui
      * @createTime 2019-05-23 20:54
      * @param map
      */
-    void loadInto(Map<String, Class<? extends IInterceptor>> map);
+    void loadInto(Map<Integer, Class<? extends IInterceptor>> map);
 }
