@@ -133,13 +133,14 @@ public class EasyRouter {
         }
     }
 
-    protected Object navigation(Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
+    protected Object navigation(final Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
 
         if (callback != null) {
 
             InterceptorImpl.onInterceptions(postcard, new InterceptorCallback() {
                 @Override
                 public void onNext(Postcard postcard) {
+                    _navigation(context, postcard, requestCode, callback);
                 }
 
                 @Override
@@ -148,7 +149,15 @@ public class EasyRouter {
                     callback.onInterrupt(new Throwable(interruptMsg));
                 }
             });
+        }else{
+
+            return _navigation(context, postcard, requestCode, callback);
         }
+
+        return null;
+    }
+
+    protected Object _navigation(final Context context, final Postcard postcard, final int requestCode, final NavigationCallback callback) {
         try {
             prepareCard(postcard);
         } catch (NoRouteFoundException e) {
